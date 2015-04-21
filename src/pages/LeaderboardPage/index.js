@@ -1,10 +1,10 @@
 var React = require('react');
 
-var LeaderboardStore = require('../../stores/LeaderboardStore')
+var appDataStore = require('../../stores/appDataStore')
 
 var Fluxxor = require('Fluxxor')
   , stores = {
-    LeaderboardStore: new LeaderboardStore()
+    appDataStore: new appDataStore()
   }
   , actions = {}
   , flux = new Fluxxor.Flux(stores, actions);
