@@ -11,9 +11,6 @@ var Fluxxor = require('Fluxxor')
 
 var LeaderboardView = require('../../views/LeaderboardView');
 
-//
-
-
 module.exports = React.createClass({
   render: function () {
     return (

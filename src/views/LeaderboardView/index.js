@@ -36,11 +36,10 @@ module.exports = React.createClass({
             </tr>
           </thead>
           <tbody>
-            {this.state.leaderboard.map(
-              function(item) {
+            {this.state.leaderboard.map(function(item){
                 return <LeaderBoardItem key={item.id} item={item}/>
-              }
-            )}
+              })
+            }
           </tbody>
         </table>
 

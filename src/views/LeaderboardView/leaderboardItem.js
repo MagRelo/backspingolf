@@ -8,7 +8,6 @@ module.exports = React.createClass({
         <td>Name: {this.props.item.userId} </td>
         <td> {this.props.item.title}</td>
       </tr>
-
     )
   }
 

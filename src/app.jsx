@@ -10,17 +10,23 @@ var injectTapEventPlugin = require("react-tap-event-plugin");
 
 // inject:pagerequire
 var LeaderboardPage = require('./pages/LeaderboardPage');
+var SettingsPage = require('./pages/SettingsPage');
+var TeamPage = require('./pages/TeamPage');
 // endinject
 
 var menuItems = [
   // inject:menuitems
-  { payload: 'leaderboard', text: 'Leaderboard' }
+  { payload: 'leaderboard', text: 'Leaderboard' },
+  { payload: 'team', text: 'My Team' },
+  { payload: 'settings', text: 'Settings' },
   // endinject
 ];
 
 var titles = {
   // inject:titles
-  '/leaderboard': 'Leaderboard'
+  '/leaderboard': 'Leaderboard',
+  '/team': 'My Team',
+  '/settings': 'Settings',
   // endinject
 };
 
@@ -38,13 +44,10 @@ var LeftNavComponent = React.createClass({
   mixins: [Router.Navigation],
 
   render: function () {
-    // Optionally, you may add a header to the left navigation bar, by setting
-    // the `LeftNav`'s `header` property to a React component, like os:
-    //
-    //     header={<div className='logo'>Header Title.</div>}
     return (
       <LeftNav
         ref="leftNav"
+        header={<div className='logo'>Backspin</div>}
         docked={false}
         isInitiallyOpen={false}
         menuItems={this.props.menuItems}
@@ -99,6 +102,8 @@ var routes = (
   <Route name='app' path='/' handler={Master}>
     {/* inject:route */}
     <Route name='leaderboard' handler={LeaderboardPage} />
+    <Route name='settings' handler={SettingsPage} />
+    <Route name='team' handler={TeamPage} />
     {/* endinject */}
     <DefaultRoute handler={LeaderboardPage} />
   </Route>

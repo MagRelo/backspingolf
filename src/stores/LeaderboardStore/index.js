@@ -5,10 +5,7 @@ module.exports = Fluxxor.createStore({
 
   initialize: function () {
 
-    // This is where you would initialize properties of your store. If you are
-    // initializing attributes asynchronously, then you may consider calling
-    // `this.emit('change')`.
-
+    //setup data
     this.leaderboard = [];
 
     //load async data
@@ -22,9 +19,13 @@ module.exports = Fluxxor.createStore({
 
     }.bind(this));
 
-   this.bindActions();
+
+    //bind events to actions
+    this.bindActions();
 
   }
+
+  //add actions here
 
   , getState: function () {
     return {
