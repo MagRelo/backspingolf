@@ -23,27 +23,26 @@ module.exports = React.createClass({
     return this.getFlux().store('LeaderboardStore').getState();
   }
 
-  , incrementButton: function(){
-    this.getFlux().actions.addElement();
-  }
-
   , render: function () {
 
     return (
       <div className='leaderboard-view'>
 
-        <p>Length = {this.state.leaderboard.length}</p>
-
-        <ul>
-          {this.state.leaderboard.map(function(item) {
-              return <LeaderBoardItem key={item.id} item={item}/>
-            })
-          }
-        </ul>
-
-        <div>
-          <RaisedButton label="Increment" primary={true} onClick={this.incrementButton}/>
-        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>UserId</th>
+              <th>Message</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.leaderboard.map(
+              function(item) {
+                return <LeaderBoardItem key={item.id} item={item}/>
+              }
+            )}
+          </tbody>
+        </table>
 
       </div>
     );

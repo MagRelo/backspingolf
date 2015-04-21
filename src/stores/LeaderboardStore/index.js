@@ -9,31 +9,24 @@ module.exports = Fluxxor.createStore({
     // initializing attributes asynchronously, then you may consider calling
     // `this.emit('change')`.
 
-    //request('http://localhost:9000/api/pga/leaderboard', function (err, res) {
-    //  this.leaderboard = JSON.parse(res.data);
-    //  this.emit('change');
-    //}.bind(this));
+    this.leaderboard = [];
 
-    this.leaderboard = [
-     {name: "matt", age:"30", id: "1"}
-     , {name: "matt", age:"30", id: "2"}
-    ];
+    //load async data
+    request('http://jsonplaceholder.typicode.com/todos', function (err, res) {
 
-   this.bindActions(
-     'ADD_ELEMENT', this.addElement
-   );
+      //set response to store
+      this.leaderboard = JSON.parse(res.body);
 
-  },
+      //notify of change
+      this.emit('change');
 
-  //Store Methods
-  addElement: function () {
-    this.leaderboard.push({name: "Jim", age: "10", id: this.leaderboard.length + 1});
+    }.bind(this));
 
+   this.bindActions();
 
-    this.emit('change');
-  },
+  }
 
-  getState: function () {
+  , getState: function () {
     return {
       leaderboard: this.leaderboard
     }

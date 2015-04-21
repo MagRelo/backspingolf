@@ -9,21 +9,18 @@ var injectTapEventPlugin = require("react-tap-event-plugin");
 // THIS FILE; THE AUTO-GENERATORS RELY ON SOME OF THEM**.
 
 // inject:pagerequire
-var HomePage = require('./pages/HomePage');
 var LeaderboardPage = require('./pages/LeaderboardPage');
 // endinject
 
 var menuItems = [
   // inject:menuitems
-  { payload: 'home', text: 'backspinApp' },
-  { payload: 'leaderboard', text: 'Leaderboard' },
+  { payload: 'leaderboard', text: 'Leaderboard' }
   // endinject
 ];
 
 var titles = {
   // inject:titles
-  '/home': 'backspinApp',
-  '/leaderboard': 'Leaderboard',
+  '/leaderboard': 'Leaderboard'
   // endinject
 };
 
@@ -101,10 +98,9 @@ var Master = React.createClass({
 var routes = (
   <Route name='app' path='/' handler={Master}>
     {/* inject:route */}
-    <Route name='home' handler={HomePage} />
     <Route name='leaderboard' handler={LeaderboardPage} />
     {/* endinject */}
-    <DefaultRoute handler={HomePage} />
+    <DefaultRoute handler={LeaderboardPage} />
   </Route>
 );
 

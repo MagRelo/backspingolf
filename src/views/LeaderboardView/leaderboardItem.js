@@ -4,7 +4,11 @@ module.exports = React.createClass({
 
   render: function(){
     return(
-      <li>Name: {this.props.item.name}, Age: {this.props.item.age}</li>
+      <tr>
+        <td>Name: {this.props.item.userId} </td>
+        <td> {this.props.item.title}</td>
+      </tr>
+
     )
   }
 
