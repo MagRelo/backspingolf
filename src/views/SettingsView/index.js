@@ -16,14 +16,14 @@ module.exports = React.createClass({
   , render: function () {
     return (
       <div className='settings-view'>
-        <label for="a">A</label>
-        <input type="checkbox" value={this.state.appData.settings.settingA}/>
+        <label htmlFor="a">A</label>
+        <input type="checkbox" value={this.state.appData.settings.settingA}></input>
 
-        <label for="b">B</label>
-        <input type="checkbox" value={this.state.appData.settings.settingA}/>
+        <label htmlFor="b">B</label>
+        <input type="checkbox" value={this.state.appData.settings.settingB}></input>
 
-        <label for="c">C</label>
-        <input type="checkbox" value={this.state.appData.settings.settingA}/>
+        <label htmlFor="c">C</label>
+        <input type="text" value={this.state.appData.settings.settingC}></input>
       </div>
     );
   }

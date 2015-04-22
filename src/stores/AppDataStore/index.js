@@ -9,7 +9,12 @@ module.exports = Fluxxor.createStore({
     this.appData = {
       leaderboard: [],
       team: {},
-      auth: {}
+      auth: {},
+      settings: {
+        settingA: false,
+        settingB: true,
+        settingC: "12"
+      }
     }
 
     //load async data
