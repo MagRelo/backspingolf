@@ -1,29 +1,28 @@
 var React = require('react')
-  , Fluxxor = require('Fluxxor')
-  , helpers = require('../../helpers')
-  , StoreWatchMixin = Fluxxor.StoreWatchMixin;
+  , Menu = require('material-ui').Menu
 
-var appDataStore = require('../../stores/AppDataStore');
+var filterMenuItems = [
+  { payload: '1', text: 'Text Opt-In', toggle: true},
+  { payload: '2', text: 'Text Opt-Out', toggle: true, defaultToggled: true},
+  { payload: '3', text: 'Voice Opt-Out', toggle: true, disabled: true}
+];
 
 module.exports = React.createClass({
 
-  mixins: [helpers.FluxMixin, StoreWatchMixin('appDataStore') ]
-
-  , getStateFromFlux: function () {
-    return this.getFlux().store('appDataStore').getState();
-  }
-
-  , render: function () {
+  render: function () {
     return (
       <div className='settings-view'>
         <label htmlFor="a">A</label>
-        <input type="checkbox" value={this.state.appData.settings.settingA}></input>
+        <input type="checkbox" value={}></input>
 
         <label htmlFor="b">B</label>
-        <input type="checkbox" value={this.state.appData.settings.settingB}></input>
+        <input type="checkbox" value={this.props.settings.settingB}></input>
 
         <label htmlFor="c">C</label>
-        <input type="text" value={this.state.appData.settings.settingC}></input>
+        <input type="text" value={this.props.settings.settingC}></input>
+
+        <Menu menuItems={filterMenuItems} />
+
       </div>
     );
   }

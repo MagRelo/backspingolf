@@ -3,8 +3,6 @@ var React = require('react')
   , helpers = require('../../helpers')
   , StoreWatchMixin = Fluxxor.StoreWatchMixin;
 
-var SettingsView = require('../../views/SettingsView');
-
 module.exports = React.createClass({
 
   mixins: [helpers.FluxMixin, StoreWatchMixin('appDataStore') ]
@@ -15,8 +13,10 @@ module.exports = React.createClass({
 
   , render: function () {
     return (
-      <div className='settings-page'>
-        <SettingsView settings={this.state.appData.settings}/>
+      <div className='home-page'>
+
+
+
       </div>
     );
   }
