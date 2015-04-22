@@ -1,21 +1,22 @@
-var React = require('react');
-
-var appDataStore = require('../../stores/appDataStore')
-
-var Fluxxor = require('Fluxxor')
-  , stores = {
-    appDataStore: new appDataStore()
-  }
-  , actions = {}
-  , flux = new Fluxxor.Flux(stores, actions);
+var React = require('react')
+  , Fluxxor = require('Fluxxor')
+  , helpers = require('../../helpers')
+  , StoreWatchMixin = Fluxxor.StoreWatchMixin;
 
 var SettingsView = require('../../views/SettingsView');
 
 module.exports = React.createClass({
-  render: function () {
+
+  mixins: [helpers.FluxMixin, StoreWatchMixin('appDataStore') ]
+
+  , getStateFromFlux: function () {
+    return this.getFlux().store('appDataStore').getState();
+  }
+
+  , render: function () {
     return (
       <div className='settings-page'>
-        <SettingsView flux={flux} />
+        <SettingsView />
       </div>
     );
   }

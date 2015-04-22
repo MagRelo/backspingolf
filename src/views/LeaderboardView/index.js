@@ -1,26 +1,13 @@
 var React = require('react')
-  , Fluxxor = require('Fluxxor')
-  , helpers = require('../../helpers')
-  , StoreWatchMixin = Fluxxor.StoreWatchMixin;
-
-var appDataStore = require('../../stores/appDataStore');
 
 var LeaderBoardItem = require('./leaderboardItem');
 
-
 module.exports = React.createClass({
 
-  mixins: [helpers.FluxMixin, StoreWatchMixin('appDataStore') ]
-
-  , getStateFromFlux: function () {
-    return this.getFlux().store('appDataStore').getState();
-  }
-
-  , render: function () {
-
+  render: function () {
     return (
-      <div className='leaderboard-view'>
 
+      <div className='leaderboard-view'>
         <table>
           <thead>
             <tr>
@@ -29,13 +16,12 @@ module.exports = React.createClass({
             </tr>
           </thead>
           <tbody>
-            {this.state.appData.leaderboard.map(function(item){
+            {this.props.leaderboard.map(function(item){
                 return <LeaderBoardItem key={item.id} item={item}/>
               })
             }
           </tbody>
         </table>
-
       </div>
     );
   }

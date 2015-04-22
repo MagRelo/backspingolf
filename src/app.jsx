@@ -40,6 +40,18 @@ var LeftNav = mui.LeftNav;
 
 injectTapEventPlugin();
 
+
+//----------
+var appDataStore = require('./stores/AppDataStore')
+
+var Fluxxor = require('Fluxxor')
+  , stores = {
+    appDataStore: new appDataStore()
+  }
+  , actions = {}
+  , flux = new Fluxxor.Flux(stores, actions);
+//----------
+
 var LeftNavComponent = React.createClass({
   mixins: [Router.Navigation],
 
@@ -90,7 +102,7 @@ var Master = React.createClass({
         <LeftNavComponent ref='leftNav' menuItems={menuItems} />
 
         <div className='mui-app-content-canvas'>
-          <RouteHandler />
+          <RouteHandler flux={flux}/>
         </div>
 
       </AppCanvas>
@@ -100,11 +112,13 @@ var Master = React.createClass({
 
 var routes = (
   <Route name='app' path='/' handler={Master}>
+
     {/* inject:route */}
     <Route name='leaderboard' handler={LeaderboardPage} />
-    <Route name='settings' handler={SettingsPage} />
     <Route name='team' handler={TeamPage} />
+    <Route name='settings' handler={SettingsPage} />
     {/* endinject */}
+
     <DefaultRoute handler={LeaderboardPage} />
   </Route>
 );
