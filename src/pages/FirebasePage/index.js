@@ -16,9 +16,9 @@ module.exports = React.createClass({
     this.bindAsArray(new Firebase("https://ballstrikers.firebaseio.com/chat"), "chatItems");
   }
 
-  , componentWillUnmount: function() {
-    this.unbind("chatItems");
-  }
+  //, componentWillUnmount: function() {
+  //  this.unbind("chatItems");
+  //}
 
   //, handleSubmit: function(e) {
   //  e.preventDefault();
@@ -38,7 +38,7 @@ module.exports = React.createClass({
 
         <ul>
           {this.state.chatItems.map(function(item){
-            return <li>{item.from}: {item.content}</li>
+            return <li key={item.content}>{item.from}: {item.content}</li>
           })}
         </ul>
 
