@@ -6,7 +6,6 @@ module.exports = React.createClass({
 
   mixins: [ReactFireMixin]
 
-
   , getInitialState: function(){
    return {
       chatItems: []
@@ -15,6 +14,10 @@ module.exports = React.createClass({
 
   , componentWillMount: function() {
     this.bindAsArray(new Firebase("https://ballstrikers.firebaseio.com/chat"), "chatItems");
+  }
+
+  , componentWillUnmount: function() {
+    this.unbind("chatItems");
   }
 
   //, handleSubmit: function(e) {
@@ -31,13 +34,11 @@ module.exports = React.createClass({
     return (
       <div className='firebase-page'>
 
-
         <h2>Chat Items</h2>
+
         <ul>
           {this.state.chatItems.map(function(item){
-
             return <li>{item.from}: {item.content}</li>
-
           })}
         </ul>
 
