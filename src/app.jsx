@@ -8,6 +8,7 @@ var HomePage = require('./pages/HomePage');
 var LeaderboardPage = require('./pages/LeaderboardPage');
 var SettingsPage = require('./pages/SettingsPage');
 var TeamPage = require('./pages/TeamPage');
+var FirebasePage = require('./pages/FirebasePage');
 // endinject
 
 var menuItems = [
@@ -16,6 +17,7 @@ var menuItems = [
   { payload: 'leaderboard', text: 'Leaderboard' },
   { payload: 'team', text: 'My Team' },
   { payload: 'settings', text: 'Settings' },
+  { payload: 'firebase', text: 'Firebase' },
   // endinject
 ];
 
@@ -26,6 +28,7 @@ var titles = {
   '/leaderboard': 'Leaderboard',
   '/team': 'My Team',
   '/settings': 'Settings',
+  '/firebase': 'Firebase',
   // endinject
 };
 
@@ -117,6 +120,7 @@ var routes = (
     <Route name='leaderboard' handler={LeaderboardPage} />
     <Route name='team' handler={TeamPage} />
     <Route name='settings' handler={SettingsPage} />
+    <Route name='firebase' handler={FirebasePage} />
     {/* endinject */}
 
     <DefaultRoute handler={HomePage} />
