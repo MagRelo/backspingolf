@@ -2,7 +2,6 @@ var React = require('react')
   , Fluxxor = require('Fluxxor')
   , helpers = require('../../helpers')
   , StoreWatchMixin = Fluxxor.StoreWatchMixin
-
   , Firebase = require('firebase')
   , ReactFireMixin = require('reactfire');
 
@@ -15,7 +14,6 @@ module.exports = React.createClass({
   , getStateFromFlux: function () {
     return this.getFlux().store('appDataStore').getState();
   }
-
   , render: function () {
     return (
       <div className='leaderboard-page'>

@@ -8,6 +8,7 @@ var LeaderboardPage = require('./pages/LeaderboardPage');
 var SettingsPage = require('./pages/SettingsPage');
 var TeamPage = require('./pages/TeamPage');
 var LeaguesPage = require('./pages/LeaguesPage');
+var AuthPage = require('./pages/AuthPage');
 // endinject
 
 var menuItems = [
@@ -16,6 +17,7 @@ var menuItems = [
   { payload: 'team', text: 'My Team' },
   { payload: 'settings', text: 'Settings' },
   { payload: 'leagues', text: 'Leagues' },
+  { payload: 'auth', text: 'Login/Logout' },
   // endinject
 ];
 
@@ -26,6 +28,7 @@ var titles = {
   '/team': 'My Team',
   '/settings': 'Settings',
   '/leagues': 'Leagues',
+  '/auth': 'Login/Logout',
   // endinject
 };
 
@@ -39,15 +42,18 @@ var LeftNav = mui.LeftNav;
 
 injectTapEventPlugin();
 
-
 //----------
 var appDataStore = require('./stores/AppDataStore')
-
 var Fluxxor = require('Fluxxor')
+
   , stores = {
     appDataStore: new appDataStore()
   }
-  , actions = {}
+  , actions = {
+    login: function () { this.dispatch('LOGIN')}
+    , logout: function () { this.dispatch('LOGOUT')}
+  }
+
   , flux = new Fluxxor.Flux(stores, actions);
 //----------
 
@@ -117,6 +123,7 @@ var routes = (
     <Route name='team' handler={TeamPage} />
     <Route name='leagues' handler={LeaguesPage} />
     <Route name='settings' handler={SettingsPage} />
+    <Route name='auth' handler={AuthPage} />
     {/* endinject */}
 
     <DefaultRoute handler={LeaderboardPage} />

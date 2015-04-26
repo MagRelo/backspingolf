@@ -1,17 +1,21 @@
 var React = require('react')
-
+  , mui = require('material-ui')
+  , Paper= mui.Paper
 
 module.exports = React.createClass({
 
-  render: function () {
+  propTypes: {
+
+  }
+
+  , render: function () {
     return (
 
       <div className='leaderboard-view'>
 
         <h4>Leaderboard</h4>
-
         <ul>
-          {this.state.chatItems.map(function(item, i){
+          {this.props.leaderboard.map(function(item, i){
             return(
               <li key={i}>
                 <Paper>

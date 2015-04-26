@@ -1,5 +1,6 @@
 var Fluxxor = require('Fluxxor')
-  , request = require('request');
+  , request = require('request')
+  , Firebase = require('firebase');
 
 
 module.exports = Fluxxor.createStore({
@@ -7,47 +8,39 @@ module.exports = Fluxxor.createStore({
   initialize: function () {
 
     this.appData = {
-      leaderboard: [],
-      team: {},
-      auth: {},
-      settings: {
-        settingA: false,
-        settingB: true,
-        settingC: "12"
-      }
+      leaderboard: []
+      , auth: {}
     }
 
-    //load async data
-    request('http://jsonplaceholder.typicode.com/todos', function (err, res) {
+    //TODO - connect to firebase
 
-      //set response to store
-      this.appData.leaderboard = JSON.parse(res.body);
-
-      //notify of change
-      this.emit('change');
-
-    }.bind(this));
-
-    // You may also want to bind some actions.
-    //
-    // Example:
-    //
-    //     this.bindActions(
-    //       'DO_SOMETHING', this.doSomething
-    //     );
+    this.bindActions(
+      'LOGIN', this.login,
+      'LOGOUT', this.logout
+    );
 
   },
 
-  // If you bound some actions in the `initialize` method, then it may be best
-  // to have those actions refer to a method in this class. In this case, create
-  // the method here. Example:
-  //
-  //     doSomething: function () {
-  //       // Maybe do something with `this.someAttribute`?
-  //
-  //       // Call this if you've made some changes to this store.
-  //       this.emit('change');
-  //     },
+  login: function () {
+    var ref = new Firebase("https://ballstrikers.firebaseio.com");
+    ref.authWithOAuthPopup("google", function(error, authData) {
+      if (error) {
+        console.log("Login Failed!", error);
+      } else {
+        this.appData.auth = authData;
+
+        this.emit('change');
+        console.log("Authenticated successfully");
+      }
+    }.bind(this));
+
+  },
+  logout: function () {
+    this.appData.auth = {};
+
+    this.emit('change');
+    console.log("Logged Out");
+  },
 
   getState: function () {
     return {
