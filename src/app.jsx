@@ -4,31 +4,28 @@ var mui = require('material-ui');
 var injectTapEventPlugin = require("react-tap-event-plugin");
 
 // inject:pagerequire
-var HomePage = require('./pages/HomePage');
 var LeaderboardPage = require('./pages/LeaderboardPage');
 var SettingsPage = require('./pages/SettingsPage');
 var TeamPage = require('./pages/TeamPage');
-var FirebasePage = require('./pages/FirebasePage');
+var LeaguesPage = require('./pages/LeaguesPage');
 // endinject
 
 var menuItems = [
   // inject:menuitems
-  { payload: 'home', text: 'Home' },
   { payload: 'leaderboard', text: 'Leaderboard' },
   { payload: 'team', text: 'My Team' },
   { payload: 'settings', text: 'Settings' },
-  { payload: 'firebase', text: 'Firebase' },
+  { payload: 'leagues', text: 'Leagues' },
   // endinject
 ];
 
 var titles = {
   // inject:titles
   '/': 'Backspin',
-  '/home': 'Backspin',
   '/leaderboard': 'Leaderboard',
   '/team': 'My Team',
   '/settings': 'Settings',
-  '/firebase': 'Firebase',
+  '/leagues': 'Leagues',
   // endinject
 };
 
@@ -116,14 +113,13 @@ var routes = (
   <Route name='app' path='/' handler={Master}>
 
     {/* inject:route */}
-    <Route name='home' handler={HomePage} />
     <Route name='leaderboard' handler={LeaderboardPage} />
     <Route name='team' handler={TeamPage} />
+    <Route name='leagues' handler={LeaguesPage} />
     <Route name='settings' handler={SettingsPage} />
-    <Route name='firebase' handler={FirebasePage} />
     {/* endinject */}
 
-    <DefaultRoute handler={HomePage} />
+    <DefaultRoute handler={LeaderboardPage} />
   </Route>
 );
 

@@ -2,13 +2,19 @@ var React = require('react')
   , Firebase = require('firebase')
   , ReactFireMixin = require('reactfire')
 
+  , mui = require('material-ui')
+  , Paper= mui.Paper
+
+  , ChatFormView = require('../../views/ChatFormView')
+
 module.exports = React.createClass({
 
   mixins: [ReactFireMixin]
 
   , getInitialState: function(){
    return {
-      chatItems: []
+     chatItems: []
+     , chatMessage: ""
     }
   }
 
@@ -20,15 +26,15 @@ module.exports = React.createClass({
   //  this.unbind("chatItems");
   //}
 
-  //, handleSubmit: function(e) {
-  //  e.preventDefault();
-  //
-  //  this.firebaseRefs["items"].push({
-  //    text: this.state.text
-  //  });
-  //
-  //  this.setState({ text: "" });
-  //}
+  , handleSubmit: function(e) {
+    e.preventDefault();
+
+    this.firebaseRefs["chatItems"].push({
+      text: this.state.chatMessage
+    });
+
+    this.setState({ text: "" });
+  }
 
   , render: function () {
     return (
@@ -36,11 +42,19 @@ module.exports = React.createClass({
 
         <h2>Chat Items</h2>
 
-        <ul>
-          {this.state.chatItems.map(function(item){
-            return <li key={item.content}>{item.from}: {item.content}</li>
-          })}
-        </ul>
+          <ul>
+            {this.state.chatItems.map(function(item, i){
+              return(
+                <li key={i}>
+                  <Paper>
+                    <div className="chatMessage">{item.from}: {item.content} </div>
+                  </Paper>
+                </li>
+              )
+            })}
+          </ul>
+
+        <ChatFormView chatMessage="chatMessage" addMessageFunction={this.handleSubmit}></ChatFormView>
 
       </div>
     );

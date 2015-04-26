@@ -1,6 +1,5 @@
 var React = require('react')
 
-var LeaderBoardItem = require('./leaderboardItem');
 
 module.exports = React.createClass({
 
@@ -8,20 +7,21 @@ module.exports = React.createClass({
     return (
 
       <div className='leaderboard-view'>
-        <table>
-          <thead>
-            <tr>
-              <th>UserId</th>
-              <th>Message</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.props.leaderboard.map(function(item){
-                return <LeaderBoardItem key={item.id} item={item}/>
-              })
-            }
-          </tbody>
-        </table>
+
+        <h4>Leaderboard</h4>
+
+        <ul>
+          {this.state.chatItems.map(function(item, i){
+            return(
+              <li key={i}>
+                <Paper>
+                  <div className="chatMessage">{item.from}: {item.content} </div>
+                </Paper>
+              </li>
+            )
+          })}
+        </ul>
+
       </div>
     );
   }
