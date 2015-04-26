@@ -27,12 +27,17 @@ module.exports = React.createClass({
     return (
       <div className='auth-page'>
         {this.state.appData.auth.auth ?
+
           <ProfileView
             profilePicURL={this.state.appData.auth.google.cachedUserProfile.picture}
             profileName={this.state.appData.auth.google.cachedUserProfile.name}
+            profileEmail={this.state.appData.auth.google.cachedUserProfile.email}
             logoutFunction={this.logout}/>
+
           :
+
           <LoginView loginFunction={this.login}/>
+
         }
       </div>
     );

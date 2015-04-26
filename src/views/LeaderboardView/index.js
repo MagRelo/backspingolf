@@ -5,7 +5,13 @@ var React = require('react')
 module.exports = React.createClass({
 
   propTypes: {
+    leaderboard: React.PropTypes.array
+  }
 
+  , getDefaultProps: function() {
+    return {
+      leaderboard: []
+    };
   }
 
   , render: function () {

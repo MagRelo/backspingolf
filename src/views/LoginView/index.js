@@ -12,7 +12,11 @@ module.exports = React.createClass({
   , render: function () {
     return (
       <div className='login-view'>
-        <RaisedButton label="Login" onClick={this.props.loginFunction}></RaisedButton>
+        <h3>Sign in with Google</h3>
+        <RaisedButton
+          label="Sign In"
+          primary={true}
+          onClick={this.props.loginFunction}></RaisedButton>
       </div>
     );
   }
