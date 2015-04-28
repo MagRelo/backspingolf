@@ -1,17 +1,17 @@
 var Fluxxor = require('Fluxxor')
-  , Firebase = require('firebase');
+  , Firebase = require('firebase')
+  , ReactFire = require('reactfire')
 
+var fireBaseRef = new Firebase("https://ballstrikers.firebaseio.com");
 
 module.exports = Fluxxor.createStore({
 
   initialize: function () {
 
     this.appData = {
-      auth: {}
-      , errors: []
+      auth: {},
+      errors: []
     }
-
-    //TODO - connect to firebase
 
     this.bindActions(
       'LOGIN', this.login,
@@ -20,18 +20,22 @@ module.exports = Fluxxor.createStore({
   },
 
   login: function () {
-    var ref = new Firebase("https://ballstrikers.firebaseio.com");
-    ref.authWithOAuthPopup(
+
+    fireBaseRef.authWithOAuthPopup(
       "google"
       , function(error, authData) {
           if (error) {
-            console.log("Login Failed!", error);
+
+            this.appData.errors.push(error)
+            this.emit('change');
+            console.log("Login Failed!", error)
+
           } else {
 
             this.appData.auth = authData;
-
             this.emit('change');
             console.log("Authenticated successfully");
+
           }
         }.bind(this)
       , {scope: "email", remember: "sessionOnly"}

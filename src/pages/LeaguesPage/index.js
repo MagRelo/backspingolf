@@ -1,5 +1,7 @@
 var React = require('react')
-  , Firebase = require('firebase')
+  , Fluxxor = require('Fluxxor')
+  , helpers = require('../../helpers')
+  , StoreWatchMixin = Fluxxor.StoreWatchMixin
   , ReactFireMixin = require('reactfire')
 
   , Paper = require('material-ui').Paper
@@ -9,13 +11,17 @@ var React = require('react')
 
 module.exports = React.createClass({
 
-  mixins: [ReactFireMixin]
+  mixins: [helpers.FluxMixin, StoreWatchMixin('appDataStore'), ReactFireMixin]
 
   , getInitialState: function(){
     return {
       chatItems: []
       , chatMessage: ""
     }
+  }
+
+  , getStateFromFlux: function () {
+    return this.getFlux().store('appDataStore').getState();
   }
 
   , componentWillMount: function() {
@@ -26,7 +32,7 @@ module.exports = React.createClass({
     e.preventDefault();
 
     this.firebaseRefs["chatItems"].push({
-      id: ""
+      id: this.state.appData.auth.uid
       , from: "tester"
       , content: this.state.chatMessage
     });
@@ -52,8 +58,9 @@ module.exports = React.createClass({
           })}
         </ul>
 
-        <ChatFormView chatMessage="chatMessage" addMessageFunction={this.handleSubmit}></ChatFormView>
-
+        <ChatFormView
+          submitButtonLabel="Send message"
+          handleSubmit={this.handleSubmit}/>
       </div>
     );
   }

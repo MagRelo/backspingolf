@@ -1,13 +1,21 @@
-var React = require('react')
+var React = require('react/addons')
   , mui = require('material-ui')
   , RaisedButton = mui.RaisedButton
   , TextField = mui.TextField;
 
 module.exports = React.createClass({
 
-  propTypes: {
-    chatMessage: React.PropTypes.string
-    , addMessageFunction: React.PropTypes.func
+  mixins: [React.addons.LinkedStateMixin]
+
+  , propTypes: {
+    submitButtonLabel: React.PropTypes.string
+    , handleSubmit: React.PropTypes.func
+  }
+
+  , getInitialState: function(){
+    return {
+      chatMessage: ""
+    }
   }
 
   , render: function(){
@@ -17,13 +25,15 @@ module.exports = React.createClass({
         <TextField
           name="chatMessage"
           hintText="Add chat message..."
-          multiline={true}/>
+          multiline={true}
+          valueLink={this.linkState('chatMessage')}/>
 
         <RaisedButton
-          label="Send Message"
+          label={this.props.submitButtonLabel}
           primary={true}
-          onClick={this.props.addMessageFunction}>
+          onClick={this.props.handleSubmit}>
         </RaisedButton>
+
       </div>
     )
   }
