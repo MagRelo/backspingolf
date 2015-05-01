@@ -1,7 +1,7 @@
 var React = require('react/addons')
   , mui = require('material-ui')
   , RaisedButton = mui.RaisedButton
-  , TextField = mui.TextField;
+  , TextField = mui.TextField
 
 module.exports = React.createClass({
 
@@ -13,9 +13,15 @@ module.exports = React.createClass({
   }
 
   , getInitialState: function(){
-    return {
-      chatMessage: ""
-    }
+    return { chatMessage: ""}
+  }
+
+  , handleSubmit: function(e) {
+    e.preventDefault();
+
+    this.props.handleSubmit(this.state.chatMessage);
+
+    this.setState({ chatMessage: "" });
   }
 
   , render: function(){
@@ -31,7 +37,7 @@ module.exports = React.createClass({
         <RaisedButton
           label={this.props.submitButtonLabel}
           primary={true}
-          onClick={this.props.handleSubmit}>
+          onClick={this.handleSubmit}>
         </RaisedButton>
 
       </div>

@@ -13,6 +13,9 @@ module.exports = Fluxxor.createStore({
       errors: []
     }
 
+    this.appData.auth = fireBaseRef.getAuth() || {};
+
+
     this.bindActions(
       'LOGIN', this.login,
       'LOGOUT', this.logout
@@ -44,6 +47,8 @@ module.exports = Fluxxor.createStore({
   },
 
   logout: function () {
+
+    fireBaseRef.unauth();
     this.appData.auth = {};
 
     this.emit('change');

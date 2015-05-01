@@ -13,10 +13,10 @@ var AuthPage = require('./pages/AuthPage');
 
 var menuItems = [
   // inject:menuitems
-  { payload: 'leaderboard', text: 'Leaderboard' },
-  { payload: 'team', text: 'My Team' },
-  { payload: 'settings', text: 'Settings' },
-  { payload: 'leagues', text: 'Leagues' },
+  //{ payload: 'leaderboard', text: 'Leaderboard' },
+  //{ payload: 'team', text: 'My Team' },
+  //{ payload: 'settings', text: 'Settings' },
+  { payload: 'leagues', text: 'Chat' },
   { payload: 'auth', text: 'Login/Logout' },
   // endinject
 ];
@@ -27,7 +27,7 @@ var titles = {
   '/leaderboard': 'Leaderboard',
   '/team': 'My Team',
   '/settings': 'Settings',
-  '/leagues': 'Leagues',
+  '/leagues': 'Chat',
   '/auth': 'Login/Logout',
   // endinject
 };
