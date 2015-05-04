@@ -1,8 +1,35 @@
 var React = require('react');
-var Router = require('react-router');
-var mui = require('material-ui');
-var injectTapEventPlugin = require("react-tap-event-plugin");
 
+//-----react-router
+var Router = require('react-router')
+  , Route = Router.Route
+  , DefaultRoute = Router.DefaultRoute
+  , RouteHandler = Router.RouteHandler;
+
+//-----react-material-ui
+var mui = require('material-ui')
+  , injectTapEventPlugin = require("react-tap-event-plugin")
+  , AppCanvas = mui.AppCanvas
+  , AppBar = mui.AppBar
+  , LeftNavComponent = require('./menu')
+
+//used to listen for to events
+injectTapEventPlugin();
+
+//-----Flux
+var appDataStore = require('./stores/AppDataStore')
+var Fluxxor = require('Fluxxor')
+  , stores = {
+    appDataStore: new appDataStore()
+  }
+  , actions = {
+    login: function () { this.dispatch('LOGIN')}
+    , logout: function () { this.dispatch('LOGOUT')}
+  }
+  , flux = new Fluxxor.Flux(stores, actions);
+
+
+//-----Pages
 // inject:pagerequire
 var LeaderboardPage = require('./pages/LeaderboardPage');
 var SettingsPage = require('./pages/SettingsPage');
@@ -31,61 +58,6 @@ var titles = {
   '/auth': 'Login/Logout',
   // endinject
 };
-
-var Route = Router.Route;
-var DefaultRoute = Router.DefaultRoute;
-var RouteHandler = Router.RouteHandler;
-
-var AppCanvas = mui.AppCanvas;
-var AppBar = mui.AppBar;
-var LeftNav = mui.LeftNav;
-
-injectTapEventPlugin();
-
-//----------
-var appDataStore = require('./stores/AppDataStore')
-var Fluxxor = require('Fluxxor')
-
-  , stores = {
-    appDataStore: new appDataStore()
-  }
-  , actions = {
-    login: function () { this.dispatch('LOGIN')}
-    , logout: function () { this.dispatch('LOGOUT')}
-  }
-
-  , flux = new Fluxxor.Flux(stores, actions);
-//----------
-
-var LeftNavComponent = React.createClass({
-  mixins: [Router.Navigation],
-
-  render: function () {
-    return (
-      <LeftNav
-        ref="leftNav"
-        header={<div className='logo'>Backspin</div>}
-        docked={false}
-        isInitiallyOpen={false}
-        menuItems={this.props.menuItems}
-        onClick={this._onLeftNavChange}
-        onChange={this._onLeftNavChange} />
-    );
-  },
-
-  toggle:function () {
-    this.refs.leftNav.toggle();
-  },
-
-  close: function () {
-    this.refs.leftNav.close()
-  },
-
-  _onLeftNavChange: function(e, selectedIndex, menuItem) {
-    this.transitionTo(menuItem.payload);
-    this.refs.leftNav.close();
-  }
-});
 
 var Master = React.createClass({
   mixins: [Router.State],

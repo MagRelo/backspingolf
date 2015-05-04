@@ -43,11 +43,6 @@ module.exports = React.createClass({
     this.bindAsArray(new Firebase("https://ballstrikers.firebaseio.com/chat"), "chatItems");
   }
 
-  , handleDelete: function(itemID) {
-
-    var deleteRef = new Firebase("https://ballstrikers.firebaseio.com/chat/" + itemID);
-    deleteRef.remove();
-  }
 
   , handleSubmit: function(message) {
     this.firebaseRefs["chatItems"].push({
@@ -65,17 +60,17 @@ module.exports = React.createClass({
     return (
       <div className='leagues-page'>
 
-        <h4>Chat Items</h4>
-
         {!this.state.appData.auth.auth ?
+
           <p>Please log in.</p>
+
           :
 
           <div>
             <ChatList data={this.state.chatItems}></ChatList>
 
             <ChatFormView
-              submitButtonLabel="Send message"
+              submitButtonLabel="Send"
               handleSubmit={this.handleSubmit}
               />
 

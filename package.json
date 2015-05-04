@@ -1,8 +1,14 @@
 {
   "scripts": {
-    "server": "gulp develop",
+    "start": "gulp develop",
     "test": "jest"
   },
+  "description": "test project for React + Fluxxor + Firebase",
+  "repository" : {
+    "type" : "git"
+    , "url" : "https://github.com/MagRelo/backspingolf.git"
+  },
+  "author": "Matt Lovan",
   "devDependencies": {
     "browserify": "^6.3.3",
     "del": "^0.1.3",

@@ -36,7 +36,7 @@ module.exports = React.createClass({
 
         <RaisedButton
           label={this.props.submitButtonLabel}
-          primary={true}
+          secondary={true}
           onClick={this.handleSubmit}>
         </RaisedButton>
 

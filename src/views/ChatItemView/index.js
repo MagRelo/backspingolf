@@ -1,14 +1,9 @@
 var React = require('react')
   , mui = require('material-ui')
-  , RaisedButton = mui.RaisedButton
+  , FlatButton = mui.FlatButton
+  , Paper = mui.Paper
 
 
-
-// <RaisedButton
-//label="Delete"
-//primary={true}
-//onClick={this.handleDelete}>
-//</RaisedButton>
 
 module.exports = React.createClass({
 
@@ -16,20 +11,30 @@ module.exports = React.createClass({
     id: React.PropTypes.string
     , name: React.PropTypes.string
     , message: React.PropTypes.string
-    , handleDelete: React.PropTypes.func
   }
 
 
   , handleDelete: function(e) {
     e.preventDefault();
-    this.props.handleDelete(this.props.id);
+
+    var deleteRef = new Firebase("https://ballstrikers.firebaseio.com/chat/" + this.props.id);
+    deleteRef.remove();
   }
 
   , render: function () {
     return (
-      <div className='ChatItem-view'>
-        <p> {this.props.name}: {this.props.message} </p>
-      </div>
+      <Paper className='ChatItem-view'>
+
+         <FlatButton
+          label="Delete"
+          primary={true}
+          onClick={this.handleDelete}>
+        </FlatButton>
+
+        <h4> {this.props.name}</h4>
+        <p>{this.props.message} </p>
+
+      </Paper>
     );
   }
 
