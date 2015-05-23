@@ -36,6 +36,9 @@ module.exports = Fluxxor.createStore({
           } else {
 
             this.appData.auth = authData;
+
+
+
             this.emit('change');
             console.log("Authenticated successfully");
 

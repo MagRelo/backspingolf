@@ -12,8 +12,24 @@ module.exports = React.createClass({
     , handleSubmit: React.PropTypes.func
   }
 
+  , componentDidMount: function(){
+
+  }
+
+  , componentWillUnmount: function(){
+
+  }
+
   , getInitialState: function(){
     return { chatMessage: ""}
+  }
+
+  , handleKeyDown: function(e) {
+    var ENTER = 13;
+    if( e.keyCode == ENTER ) {
+      this.handleSubmit();
+    }
+
   }
 
   , handleSubmit: function(e) {
